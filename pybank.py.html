@@ -1,0 +1,120 @@
+
+# coding: utf-8
+
+# In[ ]:
+
+
+import pandas as pd
+import csv
+import os
+import numpy as np
+import sys
+
+
+# In[2]:
+
+
+file_name = input("What's name of the file you want to analyse? ")
+
+
+# In[3]:
+
+
+bank_csv = os.path.join('raw_data',file_name)
+
+
+# In[4]:
+
+
+bank_df = pd.read_csv(bank_csv)
+bank_df.head()
+
+
+# In[5]:
+
+
+total_months = bank_df["Date"].count()
+
+
+# In[6]:
+
+
+total_rev = bank_df["Revenue"].sum()
+
+
+# In[7]:
+
+
+#bank_df.set_index('Date', inplace=True)
+rolling_change = bank_df["Revenue"]- bank_df["Revenue"].shift(1)  
+
+
+# In[8]:
+
+
+rolling_df = pd.DataFrame(rolling_change)
+
+
+# In[9]:
+
+
+avg_monthly = rolling_df["Revenue"].mean()
+
+
+# In[10]:
+
+
+grt_inc = rolling_df["Revenue"].max()
+
+
+# In[11]:
+
+
+grt_date = rolling_df.loc[rolling_df["Revenue"] == grt_inc]
+
+
+# In[12]:
+
+
+index_dt = grt_date[grt_date['Revenue'] == grt_inc].index[0]
+
+
+# In[13]:
+
+
+grt_dec = rolling_df["Revenue"].min()
+
+
+# In[14]:
+
+
+dec_date = rolling_df.loc[rolling_df["Revenue"] == grt_dec]
+
+
+# In[15]:
+
+
+index_dt2 = dec_date[dec_date['Revenue'] == grt_dec].index[0]
+
+
+# In[16]:
+
+
+sys.stdout = open('Output.txt', 'w')
+
+
+# In[17]:
+
+
+print("Total Months  : " + str(total_months))
+print("Total Revenue : " + str(total_rev))
+print("Average Monthly Change : " + str(avg_monthly))
+print("Greatest Increase in Revenue : " + str(index_dt) + " (" + str(grt_inc) + ")")
+print("Greatest Decrease in Revenue : " + str(index_dt2) + " (" + str(grt_dec) + ")")
+
+
+# In[ ]:
+
+
+sys.stdout.close()
+
