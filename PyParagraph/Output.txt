@@ -1,0 +1,4 @@
+Approximate Word Count: 289
+Approximate Sentence Count:  11
+Average Letter Count:  6.190311418685121
+Average Sentence Length: : 26.272727272727273
