@@ -1,4 +1,12 @@
 
+## Game Analysis:
+    
+Gaming Players are mostly Male
+Gaming productions/items are bought mostly by Male
+People over 20 are looking more engaged into Gaming or buying gaming products.
+
+
+
 
 ```python
 import pandas as pd
